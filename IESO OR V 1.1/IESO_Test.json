@@ -1,0 +1,835 @@
+{
+  "info": {
+    "_postman_id": "460f956b-98a5-4ab0-acae-ec9576fe0768",
+    "name": "IESO OR V1.1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "register user",
+      "_postman_id": "14f479a2-7565-4e93-baba-fa5bcbf5cba0",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"{{userName}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/register"
+      },
+      "response": []
+    },
+    {
+      "name": "authenticate User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "d44c45df-4980-4698-b56f-0eb1481627d0",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "const newAccessToken = pm.response.json().token;\r",
+              "\r",
+              "pm.environment.set(\"access_token\", newAccessToken);\r",
+              "\r",
+              "//postman.setNextRequest(\"create sheduler\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "53becf72-5765-44a8-9d1e-7346dd916b5e",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"{{userName}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/authenticate"
+      },
+      "response": []
+    },
+    {
+      "name": "write query Copy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "ce3a455e-6593-449f-898c-5d328319514f",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "824aa380-f0d7-4e92-a8b4-afaabce151b0",
+            "exec": [
+              "\r",
+              "pm.test(\"Status code is 204\", function () {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});\r",
+              "//setTimeout(() => {}, 10000);\r",
+              "\r",
+              "\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "1e28e457-c19f-40f4-9c16-0d5a407faeec",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "password": "{{INFLUX_PASSWORD}}",
+            "username": "{{INFLUX_USERNAME}}"
+          }
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "analog_input,site_id=CA-ON-L4Z1H8-2100,point_name=AI_00001_System_1_Mode value=2\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00105_POWIN_ESS2_EVT1 value=7",
+          "options": {
+            "raw": {}
+          }
+        },
+        "url": {
+          "raw": "{{INFLUX_URL}}/write?db={{INFLUX_DB}}",
+          "host": [
+            "{{INFLUX_URL}}"
+          ],
+          "path": [
+            "write"
+          ],
+          "query": [
+            {
+              "key": "db",
+              "value": "{{INFLUX_DB}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "write query",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "ce3a455e-6593-449f-898c-5d328319514f",
+            "exec": [
+              "let input = pm.environment.get(\"queryData\"); \r",
+              "let parse = require('csv-parse/lib/sync');\r",
+              "\r",
+              "let records = parse(input, {\r",
+              " columns: true,\r",
+              " skip_empty_lines: true\r",
+              "});\r",
+              "//console.log(records);\r",
+              "SOC_ESS1_list = records.map(function (obj) {\r",
+              "  return obj.SOC_ESS1;\r",
+              "});\r",
+              "SOC_ESS2_list = records.map(function (obj) {\r",
+              "  return obj.SOC_ESS2;\r",
+              "});\r",
+              "CL_ESS1_list = records.map(function (obj) {\r",
+              "  return obj.CL_ESS1;\r",
+              "});\r",
+              "CL_ESS2_list = records.map(function (obj) {\r",
+              "  return obj.CL_ESS2;\r",
+              "});\r",
+              "sheduleCount_list = records.map(function (obj) {\r",
+              "  return obj.sheduleCount;\r",
+              "});\r",
+              "let SOC_ESS1s = pm.variables.get(\"SOC_ESS1s\");\r",
+              " SOC_ESS2s = pm.variables.get(\"SOC_ESS2s\");\r",
+              " CL_ESS1s = pm.variables.get(\"CL_ESS1s\");\r",
+              " CL_ESS2s = pm.variables.get(\"CL_ESS2s\");\r",
+              " sheduleCounts = pm.variables.get(\"sheduleCounts\");\r",
+              "    if (!SOC_ESS1s) {\r",
+              "        //console.log(\"1st time\");\r",
+              "     SOC_ESS1s = SOC_ESS1_list;\r",
+              "     SOC_ESS2s = SOC_ESS2_list;\r",
+              "     CL_ESS1s = CL_ESS1_list;\r",
+              "     CL_ESS2s = CL_ESS2_list;\r",
+              "     sheduleCounts = sheduleCount_list;\r",
+              "     //console.log(\"if loop\",SOC_ESS1s,SOC_ESS2s,CL_ESS1s,CL_ESS2s,sheduleCounts);\r",
+              "    }\r",
+              "   //console.log(\"outside\",SOC_ESS1s,SOC_ESS2s,CL_ESS1s,CL_ESS2s,sheduleCounts); \r",
+              "\r",
+              " SOC_ESS1 = SOC_ESS1s.shift();\r",
+              " SOC_ESS2 = SOC_ESS2s.shift();\r",
+              " CL_ESS1 = CL_ESS1s.shift();\r",
+              " CL_ESS2 = CL_ESS2s.shift();\r",
+              " sheduleCount = sheduleCounts.shift();\r",
+              "//console.log(\"printlist\",SOC_ESS1,SOC_ESS2,CL_ESS1,CL_ESS2,sheduleCount);\r",
+              "pm.environment.set(\"SOC_ESS1s\",SOC_ESS1s);\r",
+              "pm.environment.set(\"SOC_ESS2s\",SOC_ESS2s);\r",
+              "pm.environment.set(\"CL_ESS1s\",CL_ESS1s);\r",
+              "pm.environment.set(\"CL_ESS2s\",CL_ESS2s);\r",
+              "pm.environment.set(\"sheduleCounts\",sheduleCounts);\r",
+              "pm.environment.set(\"SOC_ESS1\",parseInt(SOC_ESS1));\r",
+              "pm.environment.set(\"SOC_ESS2\",parseInt(SOC_ESS2));\r",
+              "pm.environment.set(\"CL_ESS1\",parseInt(CL_ESS1));\r",
+              "pm.environment.set(\"CL_ESS2\",parseInt(CL_ESS2));\r",
+              "pm.environment.set(\"sheduleCount\",parseInt(sheduleCount));\r",
+              "pm.environment.set(\"scheduleExecCount\",0);\r",
+              " useCaseId = pm.environment.get(\"useCaseId\");\r",
+              " useCaseId= !useCaseId?1: useCaseId+1\r",
+              "//useCaseId=useCaseId+1\r",
+              "//console.log(\"useCaseId\",useCaseId);\r",
+              " pm.environment.set(\"useCaseId\",parseInt(useCaseId));"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "824aa380-f0d7-4e92-a8b4-afaabce151b0",
+            "exec": [
+              "\r",
+              "pm.test(\"Status code is 204\", function () {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});\r",
+              "//setTimeout(() => {}, 10000);\r",
+              "\r",
+              "\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "4590f1d7-3b3a-44d9-95cb-8e708b7b0fbb",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "password": "{{INFLUX_PASSWORD}}",
+            "username": "{{INFLUX_USERNAME}}"
+          }
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "analog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00011_System_1_Gross_Load value={{CL_ESS1}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00122_POWIN_PB_BLOCK_ONLINESTORED_WH value={{SOC_ESS1}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00023_System_2_Gross_Load value={{CL_ESS2}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00213_POWIN_PB_BLOCK_ONLINESTORED_WH value={{SOC_ESS2}}",
+          "options": {
+            "raw": {}
+          }
+        },
+        "url": {
+          "raw": "{{INFLUX_URL}}/write?db={{INFLUX_DB}}",
+          "host": [
+            "{{INFLUX_URL}}"
+          ],
+          "path": [
+            "write"
+          ],
+          "query": [
+            {
+              "key": "db",
+              "value": "{{INFLUX_DB}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create sheduler",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "d1af0799-fe9d-420f-8813-6776735f8945",
+            "exec": [
+              "let input = pm.environment.get(\"data\"); \r",
+              "let parse = require('csv-parse/lib/sync');\r",
+              "let records = parse(input, {\r",
+              " columns: true,\r",
+              " skip_empty_lines: true\r",
+              "});\r",
+              "date = new Date(); \r",
+              "startDate=pm.environment.get('startDate');\r",
+              "endDate=pm.environment.get('endDate');\r",
+              "\r",
+              "function AddMinutesToDate(date, minutes) {\r",
+              "     return new Date(date.getTime() + minutes*60000);\r",
+              "}\r",
+              "\r",
+              "netload_list = records.map(function (obj) {\r",
+              "  return obj.ProjectNetLoad;\r",
+              "});\r",
+              "//console.log(netload_list);\r",
+              "target1_list = records.map(function (obj) {\r",
+              "  return obj.TargetValues1;\r",
+              "});\r",
+              "target2_list = records.map(function (obj) {\r",
+              "  return obj.TargetValues2;\r",
+              "});\r",
+              "//console.log(\"target1_list\",target1_list,\"target2_list\",target2_list);\r",
+              "let list1=pm.environment.get(\"list1\");\r",
+              "let list2=pm.environment.get(\"list2\");\r",
+              "if(!list1)\r",
+              "    {\r",
+              "         list1=target1_list;\r",
+              "    list2=target2_list;\r",
+              "    }\r",
+              "    pm.environment.set(\"list1\", list1);\r",
+              " pm.environment.set(\"list2\", list2);\r",
+              "\r",
+              "//abc=`${list1[0]}`.charAt(0);\r",
+              "\r",
+              "ab=JSON.parse(list1[0]).length;\r",
+              "if(!ab){\r",
+              "   \r",
+              "    date = new Date(); \r",
+              "    startDate=AddMinutesToDate(date, 180).getTime();\r",
+              "endDate=AddMinutesToDate(date, 185).getTime();\r",
+              "\r",
+              "}else{\r",
+              "   \r",
+              "    startDate=AddMinutesToDate(date, 180).getTime();\r",
+              "endDate=AddMinutesToDate(date, 190).getTime();\r",
+              "}\r",
+              "\r",
+              " let loadlists = pm.environment.get(\"loadlists\");\r",
+              "     if (!loadlists) {\r",
+              "       \r",
+              "    loadlists = netload_list;\r",
+              "\r",
+              "    }\r",
+              " let project_load = loadlists.shift();\r",
+              "\r",
+              "\r",
+              " pm.environment.set(\"project_load\", parseInt(project_load));\r",
+              "\r",
+              " pm.environment.set(\"loadlists\", loadlists);\r",
+              " pm.environment.set(\"startDate\", startDate);\r",
+              " pm.environment.set(\"endDate\", endDate);\r",
+              " scheduleExecCount=pm.environment.get('scheduleExecCount');\r",
+              "scheduleExecCount=scheduleExecCount+1\r",
+              "\r",
+              " pm.environment.set(\"scheduleExecCount\",parseInt(scheduleExecCount));"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "0ec3c179-d44b-4737-bfae-f7b57d0f9076",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "if (pm.response.code === 200)\r",
+              "{\r",
+              "const schedulerid = pm.response.json().result;\r",
+              "\r",
+              "pm.environment.set(\"schedulerid\", schedulerid);\r",
+              "}\r",
+              "//setTimeout(() => {}, 20000);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "41021293-a0d1-4601-ba99-5eea91668666",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n     \"end\": {{endDate}},\n     \"mode\": 2,\n     \"note\": \"{{note}}\",\n     \"output\": {{project_load}},\n     \"start\": {{startDate}}\n   \n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/invertercommand_future_operation/project/:projectId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "invertercommand_future_operation",
+            "project",
+            ":projectId"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "{{projectId}}",
+              "description": "(Required) projectId",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search Inverter Command List of Disable by start and end timestamp",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "189955a5-62e5-4782-8573-014cf536909a",
+            "exec": [
+              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "if (pm.response.code === 200)\r",
+              "{\r",
+              "var jsonData = pm.response.json().result;\r",
+              "sId=pm.environment.get('schedulerid');\r",
+              "const sheduledId = jsonData.find\r",
+              "      (m => m.id == sId);\r",
+              "      pm.test(\"Verifying scheduled id\", function () {                    \r",
+              "      //console.log(\"sheduledId\",sheduledId);\r",
+              "      pm.expect(sheduledId).have.property('id', sId);\r",
+              "\r",
+              "});\r",
+              " //noteText=pm.environment.get('note');\r",
+              "\r",
+              "// let response = pm.response.json(),\r",
+              "//      workspaceName = response.result.filter(ws => ws.note === \"test\");\r",
+              "//     console.log('workspaceName',workspaceName);\r",
+              "//     ids = _.map(workspaceName, ({ output }) => ( Math.round(output) ));\r",
+              "//     console.log(\"output ids\",ids);\r",
+              "// jsonData=  workspaceName.length>0 ? workspaceName : undefined\r",
+              "// ;\r",
+              "// console.log(\"jsonData\",jsonData);\r",
+              "}\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "1209fdac-e4ab-4d82-86ac-3295a260af6c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/invertercommand_list/project/:projectId/future",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "invertercommand_list",
+            "project",
+            ":projectId",
+            "future"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "{{projectId}}",
+              "description": "(Required) projectId",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Verify device scheduler",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "77a563cb-11a5-437b-adb1-82ffb3585183",
+            "exec": [
+              "\r",
+              "let input = pm.environment.get(\"data\"); \r",
+              "let parse = require('csv-parse/lib/sync');\r",
+              "\r",
+              "let records = parse(input, {\r",
+              " columns: true,\r",
+              " skip_empty_lines: true\r",
+              "});\r",
+              "\r",
+              "target1_list = records.map(function (obj) {\r",
+              "  return obj.TargetValues1;\r",
+              "});\r",
+              "target2_list = records.map(function (obj) {\r",
+              "  return obj.TargetValues2;\r",
+              "});\r",
+              "\r",
+              "\r",
+              "let devieidslist= [\"ess-brucepower-1\",\"ess-brucepower-2\"];\r",
+              "\r",
+              "let devieids = pm.environment.get(\"devieids\");\r",
+              "let list1=pm.environment.get(\"list1\");\r",
+              "let list2=pm.environment.get(\"list2\");\r",
+              "     if (!devieids) {\r",
+              "         \r",
+              "    devieids = devieidslist;\r",
+              "   \r",
+              "    }\r",
+              "    if(!list1)\r",
+              "    {\r",
+              "         list1=target1_list;\r",
+              "    list2=target2_list;\r",
+              "    }\r",
+              " let deviceid = devieids.shift();\r",
+              " \r",
+              " if(deviceid==\"ess-brucepower-1\")\r",
+              " {\r",
+              "       output=list1.shift();\r",
+              "      CL_ESS=pm.environment.get('CL_ESS1');\r",
+              "\r",
+              "soc_load=pm.environment.get('SOC_ESS1');\r",
+              "     \r",
+              " }else{\r",
+              "     \r",
+              "        output=list2.shift();\r",
+              "        CL_ESS=pm.environment.get('CL_ESS2');\r",
+              "        soc_load=pm.environment.get('SOC_ESS2');\r",
+              "       \r",
+              " }\r",
+              " pm.environment.set(\"Target_load\", output);\r",
+              "  pm.environment.set(\"CL_ESS\", CL_ESS);\r",
+              "  pm.environment.set(\"soc_load\", soc_load);\r",
+              " pm.environment.set(\"list1\", list1);\r",
+              " pm.environment.set(\"list2\", list2);\r",
+              " \r",
+              " pm.environment.set(\"deviceid\", deviceid);\r",
+              "  pm.environment.set(\"devieids\", devieids);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "5acee127-2b16-404c-a696-4416c680cdea",
+            "exec": [
+              "if (pm.response.code === 200)\r",
+              "{\r",
+              "device_id=pm.environment.get('deviceid');\r",
+              "devieids = pm.environment.get(\"devieids\");\r",
+              "\r",
+              "Target_load=pm.environment.get('Target_load');\r",
+              " useCaseId = pm.environment.get(\"useCaseId\");\r",
+              " scheduleExecCount=pm.environment.get('scheduleExecCount');\r",
+              "noteText=pm.environment.get('note');\r",
+              "\r",
+              "    let response = pm.response.json(),\r",
+              "     workspaceName = response.result.filter(ws => ws.note === noteText);\r",
+              "    \r",
+              "    ids = _.map(workspaceName, ({ output }) => ( Math.round(output) ));\r",
+              "\r",
+              "jsonData=  workspaceName.length>0 ? workspaceName : undefined;\r",
+              "\r",
+              "tests[(jsonData)?'CASE#'+useCaseId+' : Project Schedule: '+scheduleExecCount+' The result have asset target values': 'CASE#'+useCaseId+' : Project Schedule:'+scheduleExecCount+'The result have null asset target values'] = (jsonData);\r",
+              "if(jsonData)\r",
+              "{\r",
+              "temp=ids;\r",
+              "console.log(\"temp\",temp);\r",
+              "function isBetween(n, a, b) {\r",
+              "   return (n - a) * (n - b) <= 0\r",
+              "}\r",
+              "\r",
+              "tests['CASE#'+useCaseId+' : Project Schedule: '+scheduleExecCount+' The '+ device_id+' asset target value '+ ids +' is positive'] = (ids.every( e  => e >= 0));\r",
+              "\r",
+              "soc_load=pm.environment.get('soc_load');\r",
+              "CL_ESS=pm.environment.get('CL_ESS');\r",
+              "project_load=pm.environment.get('project_load');\r",
+              "CL_ESS1=pm.environment.get('CL_ESS1');\r",
+              "CL_ESS2=pm.environment.get('CL_ESS2');\r",
+              "if(CL_ESS1==0 && CL_ESS2==0)\r",
+              "{\r",
+              "    temptarget_value=pm.environment.get('temptarget_value');\r",
+              "  console.log(\"temptarget_value\",temptarget_value,'temp',temp);\r",
+              "  // target_value= !target_value?temp: target_value+temp\r",
+              "  temptarget_value= !temptarget_value?temp:parseInt(temptarget_value)+parseInt(temp);\r",
+              "console.log(\"temptarget_value\",temptarget_value);\r",
+              "pm.environment.set(\"temptarget_value\",temptarget_value);\r",
+              "if(devieids.length==0)\r",
+              "{\r",
+              "   \r",
+              "    tests['CASE#'+useCaseId+' : Project Schedule: '+scheduleExecCount+' The  asset target value is '+temptarget_value+' equal to project net load '+project_load] = (temptarget_value==project_load);\r",
+              "}\r",
+              "}else{\r",
+              "   \r",
+              "pm.environment.set('multiOutput', JSON.stringify(ids));\r",
+              "\r",
+              "  tempc = JSON.parse(Target_load);\r",
+              "\r",
+              "if(tempc.length)\r",
+              "{\r",
+              "   \r",
+              "let tempq =[]\r",
+              "tempc.forEach((ele)=> {tempq.push(ids.includes(ele));\r",
+              "});\r",
+              "\r",
+              "\r",
+              "tests['CASE#'+useCaseId+' : Project Schedule: '+scheduleExecCount+' Multiple Interval Tests: The '+device_id+' asset target value is '+ids+' expected values '+tempc+' for SOC load '+soc_load+', Constraint load '+CL_ESS+' and project net load '+project_load] = ((!(tempq).includes(false)));\r",
+              "}else{\r",
+              " tests['CASE#'+useCaseId+' : Project Schedule: '+scheduleExecCount+' The '+device_id+' asset target value is '+ids+' expected values '+Target_load+' for SOC load '+soc_load+', Constraint load '+CL_ESS+' and project net load '+project_load] = (isBetween(temp,parseInt(Target_load)-100,parseInt(Target_load)+100));\r",
+              "}\r",
+              "\r",
+              "}\r",
+              "}\r",
+              "//console.log(\"devieids length\",devieids.length);\r",
+              "if (devieids && devieids.length > 0) {\r",
+              "    postman.setNextRequest(\"Verify device scheduler\");\r",
+              "}\r",
+              "}\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "2746a181-f42e-4f37-9c27-f588939ccc78",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/invertercommand_list/project/:projectId/device/:deviceId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "invertercommand_list",
+            "project",
+            ":projectId",
+            "device",
+            ":deviceId"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "{{projectId}}",
+              "type": "string"
+            },
+            {
+              "key": "deviceId",
+              "value": "{{deviceid}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "disable scheduler",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "87ace695-4917-449c-a067-1a74aef285b0",
+            "exec": [
+              "loadlists = pm.environment.get(\"loadlists\");\r",
+              "pm.environment.unset(\"devieids\");\r",
+              "    \r",
+              "    scheduleExecCount=pm.environment.get('scheduleExecCount');\r",
+              "    sheduleCount=pm.environment.get('sheduleCount');\r",
+              "    if (loadlists && loadlists.length > 0)\r",
+              "     {\r",
+              "       if(scheduleExecCount==sheduleCount)\r",
+              "        {\r",
+              "         postman.setNextRequest(\"write query\");\r",
+              "        }else{\r",
+              "        postman.setNextRequest(\"create sheduler\");\r",
+              "        }\r",
+              "     }\r",
+              "    else {\r",
+              "        console.log(\"End script\");\r",
+              "        \r",
+              "         pm.environment.unset(\"access_token\")\r",
+              "          pm.environment.unset(\"list1\")\r",
+              "           pm.environment.unset(\"list2\")\r",
+              "            pm.environment.unset(\"project_load\")\r",
+              "             pm.environment.unset(\"loadlists\")\r",
+              "              pm.environment.unset(\"startDate\")\r",
+              "               pm.environment.unset(\"endDate\")\r",
+              "                pm.environment.unset(\"scheduleExecCount\")\r",
+              "                 pm.environment.unset(\"constraint_load\")\r",
+              "                  pm.environment.unset(\"CL_ESS\")\r",
+              "                   pm.environment.unset(\"soc_load\")\r",
+              "                    pm.environment.unset(\"deviceid\")\r",
+              "                     pm.environment.unset(\"SOC_ESS1s\")\r",
+              "                      pm.environment.unset(\"SOC_ESS2s\")\r",
+              "                       pm.environment.unset(\"CL_ESS1s\")\r",
+              "                        pm.environment.unset(\"CL_ESS2s\")\r",
+              "                         pm.environment.unset(\"sheduleCounts\")\r",
+              "                          pm.environment.unset(\"SOC_ESS1\")\r",
+              "                           pm.environment.unset(\"SOC_ESS2\")\r",
+              "                            pm.environment.unset(\"CL_ESS1\")\r",
+              "                             pm.environment.unset(\"CL_ESS2\")\r",
+              "                              pm.environment.unset(\"sheduleCount\")\r",
+              "                               pm.environment.unset(\"useCaseId\")\r",
+              "                                pm.environment.unset(\"schedulerid\")\r",
+              "                                 pm.environment.unset(\"multiOutput\")\r",
+              "                                  pm.environment.unset(\"target_value\");\r",
+              "        //pm.environment.clear();\r",
+              "        \r",
+              "    }\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "a78fdcd4-cccf-45d6-9887-b4392df74e69",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Authorization",
+            "value": "barear dfghjkl;kjhgf"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/invertercommand_list/project/:projectId/disable/:schedulerid",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "invertercommand_list",
+            "project",
+            ":projectId",
+            "disable",
+            ":schedulerid"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "{{projectId}}",
+              "type": "string"
+            },
+            {
+              "key": "schedulerid",
+              "value": "{{schedulerid}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "d7839609-af76-462d-bb9d-8087a27b03bc",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "5e75eb56-8f86-4ad2-807f-657524e0415a",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
