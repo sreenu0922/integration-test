@@ -7,7 +7,7 @@
   "item": [
     {
       "name": "register user",
-      "_postman_id": "14f479a2-7565-4e93-baba-fa5bcbf5cba0",
+      "id": "14f479a2-7565-4e93-baba-fa5bcbf5cba0",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -16,7 +16,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"username\": \"{{userName}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+          "raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"test\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -48,7 +48,7 @@
           }
         }
       ],
-      "_postman_id": "53becf72-5765-44a8-9d1e-7346dd916b5e",
+      "id": "53becf72-5765-44a8-9d1e-7346dd916b5e",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -101,7 +101,7 @@
           }
         }
       ],
-      "_postman_id": "1e28e457-c19f-40f4-9c16-0d5a407faeec",
+      "id": "1e28e457-c19f-40f4-9c16-0d5a407faeec",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -117,10 +117,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "analog_input,site_id=CA-ON-L4Z1H8-2100,point_name=AI_00001_System_1_Mode value=2\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00105_POWIN_ESS2_EVT1 value=7",
-          "options": {
-            "raw": {}
-          }
+          "raw": "analog_input,site_id=CA-ON-L4Z1H8-2100,point_name=AI_00001_System_1_Mode value=2\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00105_POWIN_ESS2_EVT1 value=7"
         },
         "url": {
           "raw": "{{INFLUX_URL}}/write?db={{INFLUX_DB}}",
@@ -233,7 +230,7 @@
           }
         }
       ],
-      "_postman_id": "4590f1d7-3b3a-44d9-95cb-8e708b7b0fbb",
+      "id": "4590f1d7-3b3a-44d9-95cb-8e708b7b0fbb",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -249,10 +246,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "analog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00011_System_1_Gross_Load value={{CL_ESS1}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00122_POWIN_PB_BLOCK_ONLINESTORED_WH value={{SOC_ESS1}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00023_System_2_Gross_Load value={{CL_ESS2}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00213_POWIN_PB_BLOCK_ONLINESTORED_WH value={{SOC_ESS2}}",
-          "options": {
-            "raw": {}
-          }
+          "raw": "analog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00011_System_1_Gross_Load value={{CL_ESS1}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00122_POWIN_PB_BLOCK_ONLINESTORED_WH value={{SOC_ESS1}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00023_System_2_Gross_Load value={{CL_ESS2}}\nanalog_input,site_id=CA-ON-N0G2T0-1900,point_name=AI_00213_POWIN_PB_BLOCK_ONLINESTORED_WH value={{SOC_ESS2}}"
         },
         "url": {
           "raw": "{{INFLUX_URL}}/write?db={{INFLUX_DB}}",
@@ -372,7 +366,7 @@
           }
         }
       ],
-      "_postman_id": "41021293-a0d1-4601-ba99-5eea91668666",
+      "id": "41021293-a0d1-4601-ba99-5eea91668666",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -414,8 +408,7 @@
             {
               "key": "projectId",
               "value": "{{projectId}}",
-              "description": "(Required) projectId",
-              "type": "string"
+              "description": "(Required) projectId"
             }
           ]
         }
@@ -462,7 +455,7 @@
           }
         }
       ],
-      "_postman_id": "1209fdac-e4ab-4d82-86ac-3295a260af6c",
+      "id": "1209fdac-e4ab-4d82-86ac-3295a260af6c",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -491,8 +484,7 @@
             {
               "key": "projectId",
               "value": "{{projectId}}",
-              "description": "(Required) projectId",
-              "type": "string"
+              "description": "(Required) projectId"
             }
           ]
         }
@@ -651,7 +643,7 @@
           }
         }
       ],
-      "_postman_id": "2746a181-f42e-4f37-9c27-f588939ccc78",
+      "id": "2746a181-f42e-4f37-9c27-f588939ccc78",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -685,13 +677,11 @@
           "variable": [
             {
               "key": "projectId",
-              "value": "{{projectId}}",
-              "type": "string"
+              "value": "{{projectId}}"
             },
             {
               "key": "deviceId",
-              "value": "{{deviceid}}",
-              "type": "string"
+              "value": "{{deviceid}}"
             }
           ]
         }
@@ -758,7 +748,7 @@
           }
         }
       ],
-      "_postman_id": "a78fdcd4-cccf-45d6-9887-b4392df74e69",
+      "id": "a78fdcd4-cccf-45d6-9887-b4392df74e69",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -796,13 +786,11 @@
           "variable": [
             {
               "key": "projectId",
-              "value": "{{projectId}}",
-              "type": "string"
+              "value": "{{projectId}}"
             },
             {
               "key": "schedulerid",
-              "value": "{{schedulerid}}",
-              "type": "string"
+              "value": "{{schedulerid}}"
             }
           ]
         }
