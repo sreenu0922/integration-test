@@ -802,7 +802,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "d7839609-af76-462d-bb9d-8087a27b03bc",
+        "id": "7b1abaff-1249-4e23-ac28-df88ab53dad1",
         "type": "text/javascript",
         "exec": [
           ""
@@ -812,10 +812,12 @@
     {
       "listen": "test",
       "script": {
-        "id": "5e75eb56-8f86-4ad2-807f-657524e0415a",
+        "id": "ec0bbcec-8c0e-4053-9273-485b5ee9586f",
         "type": "text/javascript",
         "exec": [
-          ""
+          "pm.test(\"Status code is 200\", function () {",
+          "    pm.response.to.have.status(200);",
+          "});"
         ]
       }
     }
