@@ -18921,6 +18921,20 @@
             },
             {
               "name": "Create a new zone",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "53952a58-0d3e-4ba2-9c55-cf4965fe84ab",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "4c57748a-1295-4a4f-8d72-12a7e6c78f78",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -19091,7 +19105,7 @@
   ],
   "variable": [
     {
-      "id": "2e5ee1d7-bbcb-42bd-a0db-fcd56312a82b",
+      "id": "41130864-2770-453c-83ce-0298648d748e",
       "key": "baseUrl",
       "value": "http://staging.api.workflow.peakpowerenergy.com"
     }
