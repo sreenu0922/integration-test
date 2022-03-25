@@ -18191,6 +18191,11 @@
         }
       ],
       "id": "ae748271-31bc-4968-9f62-2c9c35a6525a"
+    },
+    {
+      "name": "New Folder",
+      "item": [],
+      "id": "7bbee7c2-0c78-486c-b1f2-095421888dd8"
     }
   ],
   "auth": {
@@ -18258,7 +18263,7 @@
   ],
   "variable": [
     {
-      "id": "4de25e67-0f37-4242-8e83-a7a6677e46ae",
+      "id": "dee7725e-b2a8-4288-b869-002a9abbf5f7",
       "key": "baseUrl",
       "value": "http://staging.api.workflow.peakpowerenergy.com"
     }
