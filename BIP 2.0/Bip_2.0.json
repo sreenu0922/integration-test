@@ -18769,6 +18769,20 @@
             },
             {
               "name": "Get all zones",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "613354ec-e4b7-4167-81b5-7b768d83ae8e",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "320f5eff-afd8-4c90-9d62-19e82aa43da4",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -19077,7 +19091,7 @@
   ],
   "variable": [
     {
-      "id": "69170ed2-7e9e-4fda-b3a4-4cfa9a105872",
+      "id": "2e5ee1d7-bbcb-42bd-a0db-fcd56312a82b",
       "key": "baseUrl",
       "value": "http://staging.api.workflow.peakpowerenergy.com"
     }
