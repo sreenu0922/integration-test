@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "f98b2d73-3255-48fc-a6ac-25a496ec32a5",
-    "name": "BIP 2.0 API 1.3",
+    "name": "BIP 2.0 git",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
@@ -18194,7 +18194,821 @@
     },
     {
       "name": "v3.0",
-      "item": [],
+      "item": [
+        {
+          "name": "zones Copy",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Get a single zone",
+                  "id": "bceaa39b-cef1-4d9e-ad7d-f4ab16596093",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "<Bearer Token>"
+                      }
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/zones/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "zones",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c879fc2a-79e4-419d-ba5e-31c31064f5ab",
+                          "key": "id",
+                          "value": "sit voluptate",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "db193a99-a75a-49e7-b776-448b031e3b16",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/zones/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "zones",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "sit voluptate",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    },
+                    {
+                      "id": "3fbec305-ec50-4a54-b0d0-775e7ba4d032",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/zones/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "zones",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "sit voluptate",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "name": "Update a zone",
+                  "id": "3467c7f0-9488-443d-ab04-c06204289b32",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "<Bearer Token>"
+                      }
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"areaId\": \"ullamco Ut esse qui minim\",\n    \"name\": \"veniam proident fugiat\",\n    \"description\": \"dolor in labore fugiat\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/zones/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "zones",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "341e1684-2994-43ed-9db4-fba3112403c1",
+                          "key": "id",
+                          "value": "sit voluptate",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "4a088669-a62c-4be8-90cb-0e7fe9767b3f",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"areaId\": \"ullamco Ut esse qui minim\",\n    \"name\": \"veniam proident fugiat\",\n    \"description\": \"dolor in labore fugiat\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/zones/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "zones",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "sit voluptate",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    },
+                    {
+                      "id": "d25e199c-6e27-461b-9c3a-25dbc5d8cd48",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"areaId\": \"ullamco Ut esse qui minim\",\n    \"name\": \"veniam proident fugiat\",\n    \"description\": \"dolor in labore fugiat\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/zones/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "zones",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "sit voluptate",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "name": "Delete a zone",
+                  "id": "ba5a4641-0cf3-48b9-a4b0-f796b50455ab",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "<Bearer Token>"
+                      }
+                    },
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/zones/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "zones",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1cf6fea8-28ea-466a-be78-92054630a8a7",
+                          "key": "id",
+                          "value": "sit voluptate",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "25781413-9f46-4605-91b7-e94783ac663d",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/zones/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "zones",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "sit voluptate",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    },
+                    {
+                      "id": "39d4a909-0fa9-40b0-a5e8-2a256f621c33",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/zones/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "zones",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "sit voluptate",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "name": "Upload zone plan",
+                  "id": "b46586df-cfcc-414e-a45b-0bbc484295be",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "<Bearer Token>"
+                      }
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "file",
+                          "type": "file",
+                          "description": "(Required) ",
+                          "value": null
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/zones/:id/plan",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "zones",
+                        ":id",
+                        "plan"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a9d33b6e-0606-4522-b05a-09b16caf46bd",
+                          "key": "id",
+                          "value": "sit voluptate",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "64ac3b16-76bd-4c39-b4af-757c75239140",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/zones/:id/plan",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "zones",
+                            ":id",
+                            "plan"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "sit voluptate",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    },
+                    {
+                      "id": "a29b12e1-b34b-4c02-867a-35cc5bd2f16f",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/zones/:id/plan",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "zones",
+                            ":id",
+                            "plan"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "sit voluptate",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    }
+                  ]
+                }
+              ],
+              "id": "f51679b0-b77e-4fe9-a674-cc7715a0877c"
+            },
+            {
+              "name": "Get all zones",
+              "id": "320f5eff-afd8-4c90-9d62-19e82aa43da4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/zones?pageIdx=0&pageSize=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "zones"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageIdx",
+                      "value": "0"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "areaId",
+                      "value": "e8ccb45a-6c22-4716-944d-5e3c4caa999a",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "48b174b6-6adf-4d3c-9e05-21cc96ccd931",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/zones?pageIdx=0&pageSize=100&areaId=sit voluptate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "zones"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageIdx",
+                          "value": "0"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "100"
+                        },
+                        {
+                          "key": "areaId",
+                          "value": "sit voluptate"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "62795eed-a255-46d9-85f1-6a85265c7084",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/zones?pageIdx=0&pageSize=100&areaId=sit voluptate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "zones"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageIdx",
+                          "value": "0"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "100"
+                        },
+                        {
+                          "key": "areaId",
+                          "value": "sit voluptate"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Create a new zone",
+              "id": "4c57748a-1295-4a4f-8d72-12a7e6c78f78",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"areaId\": \"e8ccb45a-6c22-4716-944d-5e3c4caa999a\",\n    \"name\": \"Zone1\",\n    \"description\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{baseUrl}}/v1/zones"
+              },
+              "response": [
+                {
+                  "id": "84aec8ef-e95a-4dc2-bde4-a6b310fd051a",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"areaId\": \"dolore\",\n    \"name\": \"aliqua\",\n    \"description\": \"Ut do\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{baseUrl}}/v1/zones"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "a3372364-194d-40ec-bfee-ce1f613c6d46",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"areaId\": \"dolore\",\n    \"name\": \"aliqua\",\n    \"description\": \"Ut do\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{baseUrl}}/v1/zones"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            }
+          ],
+          "id": "f86fa996-ef35-4ab4-8b38-ac11e688d045"
+        }
+      ],
       "id": "7bbee7c2-0c78-486c-b1f2-095421888dd8"
     }
   ],
@@ -18263,7 +19077,7 @@
   ],
   "variable": [
     {
-      "id": "324411f9-3a72-4823-9af7-eacd073c0b04",
+      "id": "69170ed2-7e9e-4fda-b3a4-4cfa9a105872",
       "key": "baseUrl",
       "value": "http://staging.api.workflow.peakpowerenergy.com"
     }
